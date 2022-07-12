@@ -27,12 +27,6 @@
   font-size: 18px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(1.5) brightness(50%) sepia(100%) saturate(1000%)
-    hue-rotate(204deg);
-}
-
 /* TABLE */
 .dsmeta-sales-table {
   width: 100%;

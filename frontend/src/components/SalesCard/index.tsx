@@ -1,5 +1,9 @@
 import NotificationButton from "../NotificationButton";
+import DatePicker, { registerLocale } from "react-datepicker";
+import br from "date-fns/locale/pt-BR";
+import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
+registerLocale("br", br);
 
 function SalesCard() {
   return (
@@ -7,10 +11,22 @@ function SalesCard() {
       <h2 className="dsmeta-sales-title">Vendas</h2>
       <div>
         <div className="dsmeta-form-control-container">
-          <input className="dsmeta-form-control" type="date" name="" id="" />
+          <DatePicker
+            locale="br"
+            selected={new Date()}
+            onChange={(date: Date) => {}}
+            className="dsmeta-form-control"
+            dateFormat="dd/MM/yyyy"
+          />
         </div>
         <div className="dsmeta-form-control-container">
-          <input className="dsmeta-form-control" type="date" name="" id="" />
+          <DatePicker
+            locale="br"
+            selected={new Date()}
+            onChange={(date: Date) => {}}
+            className="dsmeta-form-control"
+            dateFormat="dd/MM/yyyy"
+          />
         </div>
       </div>
 
