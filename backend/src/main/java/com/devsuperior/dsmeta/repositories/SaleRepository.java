@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
-
 public interface SaleRepository extends JpaRepository<Sale, Long> {
     //busca o objeto obj do tipo vendas, onde a data do objeto esteja entre minimo e maximo
     //ORDER BY -> ordena por objeto amount das 20 maiores vendas na forma decrescente
