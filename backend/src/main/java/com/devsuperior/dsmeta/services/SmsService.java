@@ -19,7 +19,6 @@ public class SmsService {
     private String twilioPhoneFrom;
     @Value("${twilio.phone.to}")
     private String twilioPhoneTo;
-
     @Autowired
     private SaleRepository saleRepository;
     public void sendSms(Long saleId) {
@@ -27,7 +26,8 @@ public class SmsService {
         String date = sale.getDate().getMonthValue() + "/" + sale.getDate().getYear();
 
         String msg = "O Vendedor " + sale.getSellerName() + " foi destaque em " + date
-                + " com um total de R$ " + String.format("%.2f", sale.getAmount());
+                + " com um total de R$ " + String.format("%.0f", sale.getAmount());
+
 
         Twilio.init(twilioSid, twilioKey);
 
