@@ -3,9 +3,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import br from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function SalesCard() {
   registerLocale("br", br);
@@ -13,6 +12,13 @@ function SalesCard() {
 
   const [minDate, setMinDate] = useState(min);
   const [maxDate, setMaxDate] = useState(new Date());
+
+  useEffect (() => {
+    axios.get("http://localhost:8080/sales")
+    .then(response => {
+      console.log(response.data);
+    });
+  }, []);
 
 
   return (
