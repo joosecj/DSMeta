@@ -3,6 +3,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import br from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
+import { Sale } from "../../models/sale";
+import { BASE_URL } from "../../utils/request";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -13,13 +15,13 @@ function SalesCard() {
   const [minDate, setMinDate] = useState(min);
   const [maxDate, setMaxDate] = useState(new Date());
 
-  useEffect (() => {
-    axios.get("http://localhost:8080/sales")
-    .then(response => {
-      console.log(response.data);
+  const [sales, setSales] = useState<Sale[]>([]);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/sales`).then((response) => {
+      setSales(response.data.content);
     });
   }, []);
-
 
   return (
     <div className="dsmeta-card">
@@ -59,45 +61,23 @@ function SalesCard() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th className="show992">#341</th>
-              <th className="show576">08/07/2022</th>
-              <th>Anakin</th>
-              <th className="show992">15</th>
-              <th className="show992">11</th>
-              <th>R$ 55300.00</th>
-              <th>
-                <div className="dsmeta-red-btn-container">
-                  <NotificationButton />
-                </div>
-              </th>
-            </tr>
-            <tr>
-              <th className="show992">#341</th>
-              <th className="show576">08/07/2022</th>
-              <th>Anakin</th>
-              <th className="show992">15</th>
-              <th className="show992">11</th>
-              <th>R$ 55300.00</th>
-              <th>
-                <div className="dsmeta-red-btn-container">
-                  <NotificationButton />
-                </div>
-              </th>
-            </tr>
-            <tr>
-              <th className="show992">#341</th>
-              <th className="show576">08/07/2022</th>
-              <th>Anakin</th>
-              <th className="show992">15</th>
-              <th className="show992">11</th>
-              <th>R$ 55300.00</th>
-              <th>
-                <div className="dsmeta-red-btn-container">
-                  <NotificationButton />
-                </div>
-              </th>
-            </tr>
+            {sales.map((sale) => {
+              return (
+                <tr key={sale.id}>
+                  <th className="show992">{sale.id}</th>
+                  <th className="show576">{new Date(sale.date).toLocaleDateString()}</th>
+                  <th>{sale.sellerName}</th>
+                  <th className="show992">{sale.visited}</th>
+                  <th className="show992">{sale.deals}</th>
+                  <th>R$ {sale.amount.toFixed(2)}</th>
+                  <th>
+                    <div className="dsmeta-red-btn-container">
+                      <NotificationButton />
+                    </div>
+                  </th>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
